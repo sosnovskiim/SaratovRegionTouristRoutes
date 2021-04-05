@@ -6,17 +6,17 @@
     <data>
         <variable
             name="viewModel"
-            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListItemViewModel"/>
+            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListItemViewModel"/>
     </data>
 
     <TextView
-        android:id="@+id/regionName"
+        android:id="@+id/routeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{viewModel.regionName}"
+        android:text="@{viewModel.routeName}"
         android:textSize="24sp"
         android:gravity="center"
         android:padding="8dp"
-        tools:text="Базарно-Карабулакский район"/>
+        tools:text="Краеведческий музей, село Ровное, Саратовская область"/>
 
 </layout>

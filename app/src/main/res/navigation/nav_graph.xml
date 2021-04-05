@@ -12,4 +12,6 @@
         android:label="RegionListFragment"
         tools:layout="@layout/fragment_region_list"/>
 
+<!--TODO Add route list screen.-->
+
 </navigation>
