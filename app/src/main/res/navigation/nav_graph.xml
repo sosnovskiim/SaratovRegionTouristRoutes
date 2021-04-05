@@ -10,8 +10,26 @@
         android:id="@+id/regionListFragment"
         android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RegionListFragment"
         android:label="RegionListFragment"
-        tools:layout="@layout/fragment_region_list"/>
+        tools:layout="@layout/fragment_region_list">
 
-<!--TODO Add route list screen.-->
+        <action
+            android:id="@+id/action_regionListFragment_to_routeListFragment"
+            app:destination="@id/routeListFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/routeListFragment"
+        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteListFragment"
+        android:label="RouteListFragment"
+        tools:layout="@layout/fragment_route_list">
+
+        <action
+            android:id="@+id/action_routeListFragment_to_regionListFragment"
+            app:destination="@id/regionListFragment"
+            app:popUpTo="@+id/regionListFragment"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
 
 </navigation>
