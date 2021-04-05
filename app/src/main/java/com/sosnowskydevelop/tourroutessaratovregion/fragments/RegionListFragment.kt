@@ -35,7 +35,10 @@ class RegionListFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(requireContext())
         fragmentRegionListBinding.regionList.layoutManager = linearLayoutManager
 
-        val regionListAdapter = RegionAdapter(regionListViewModel.regions)
+        val regionListAdapter = RegionAdapter(
+                regions = regionListViewModel.regions,
+                fragment = this,
+        )
         fragmentRegionListBinding.regionList.adapter = regionListAdapter
     }
 }

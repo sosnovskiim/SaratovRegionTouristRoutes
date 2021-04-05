@@ -5,7 +5,11 @@ import com.sosnowskydevelop.tourroutessaratovregion.data.Route
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
 
 class RouteListViewModel(
-        routeRepository: RouteRepository
+        private val routeRepository: RouteRepository
 ) : ViewModel() {
-    val routes: Array<Route> = routeRepository.getRoutes(/*TODO Pass the required id.*/ regionId = 22)
+    var routes: Array<Route> = routeRepository.getRoutes(regionId = 0)
+
+    fun initRoutes(regionId: Long) {
+        routes = routeRepository.getRoutes(regionId = regionId)
+    }
 }

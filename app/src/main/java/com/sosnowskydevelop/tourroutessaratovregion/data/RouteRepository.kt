@@ -137,7 +137,13 @@ class RouteRepository {
             ),
     )
 
-    fun getRoutes(regionId: Long): Array<Route> = routes[regionId]!!
+    fun getRoutes(regionId: Long): Array<Route> {
+        return if (regionId in routes.keys) {
+            routes[regionId]!!
+        } else {
+            arrayOf()
+        }
+    }
 
     companion object {
         // For Singleton instantiation

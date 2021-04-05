@@ -1,3 +1,6 @@
 package com.sosnowskydevelop.tourroutessaratovregion.utilities
 
 const val LOG_TAG = "sosnovskiim"
+
+const val REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST = "requestKeyRegionIdRegionListToRouteList"
+const val BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST = "bundleKeyRegionIdRegionListToRouteList"
