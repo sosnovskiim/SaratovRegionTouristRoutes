@@ -145,6 +145,17 @@ class RouteRepository {
         }
     }
 
+    fun getRoute(routeId: Long): Route? {
+        routes.values.forEach {
+            it.forEach { route ->
+                if (routeId == route.id) {
+                    return route
+                }
+            }
+        }
+        return null
+    }
+
     companion object {
         // For Singleton instantiation
         @Volatile private var instance: RouteRepository? = null

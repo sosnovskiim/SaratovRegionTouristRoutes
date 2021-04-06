@@ -2,10 +2,18 @@ package com.sosnowskydevelop.tourroutessaratovregion.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.data.Route
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.ListItemRouteBinding
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.BUNDLE_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.REQUEST_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListItemViewModel
 
 class RouteAdapter(
@@ -23,6 +31,15 @@ class RouteAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.viewModel = RouteListItemViewModel(routes[position])
+        holder.binding.routeName.setOnClickListener {
+            fragment.setFragmentResult(
+                    requestKey = REQUEST_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL,
+                    result = bundleOf(BUNDLE_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL
+                            to routes[position].id)
+            )
+            fragment.findNavController()
+                    .navigate(R.id.action_routeListFragment_to_routeDetailFragment)
+        }
     }
 
     override fun getItemCount() = routes.size

@@ -3,6 +3,7 @@ package com.sosnowskydevelop.tourroutessaratovregion.utilities
 import com.sosnowskydevelop.tourroutessaratovregion.data.RegionRepository
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListViewModelFactory
+import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteDetailViewModelFactory
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListViewModelFactory
 
 object InjectorUtils {
@@ -15,4 +16,7 @@ object InjectorUtils {
 
     fun provideRouteListViewModelFactory() =
             RouteListViewModelFactory(routeRepository = getRouteRepository())
+
+    fun provideRouteDetailViewModelFactory() =
+            RouteDetailViewModelFactory(routeRepository = getRouteRepository())
 }
