@@ -33,6 +33,8 @@ class RouteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fragmentRouteDetailBinding.viewModel = routeDetailViewModel
+
         setFragmentResultListener(
                 requestKey = REQUEST_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL
         ) { _, bundle ->
