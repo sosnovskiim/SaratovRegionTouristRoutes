@@ -26,7 +26,6 @@ class RouteRepository {
                                     _routeId = 1,
                                     _latitude = 50.46330034264079,
                                     _longitude = 48.13344970101825,
-                                    _name = "Школа №8, г.Новоузенск",
                             ),
                             _intermediatePoints = arrayOf(
                                     RoutePoint(
