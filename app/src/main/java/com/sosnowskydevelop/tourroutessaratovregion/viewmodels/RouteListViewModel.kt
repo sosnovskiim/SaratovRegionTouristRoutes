@@ -5,7 +5,7 @@ import com.sosnowskydevelop.tourroutessaratovregion.data.Route
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
 
 class RouteListViewModel(
-        private val routeRepository: RouteRepository
+    private val routeRepository: RouteRepository,
 ) : ViewModel() {
     var routes: Array<Route> = routeRepository.getRoutes(regionId = 0)
 

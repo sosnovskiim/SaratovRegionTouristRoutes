@@ -46,7 +46,8 @@ class RegionRepository {
 
     companion object {
         // For Singleton instantiation
-        @Volatile private var instance: RegionRepository? = null
+        @Volatile
+        private var instance: RegionRepository? = null
 
         fun getInstance() =
             instance ?: synchronized(this) {

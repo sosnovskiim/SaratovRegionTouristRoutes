@@ -15,8 +15,8 @@ import com.sosnowskydevelop.tourroutessaratovregion.utilities.REQUEST_KEY_REGION
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListItemViewModel
 
 class RegionAdapter(
-        private val regions: Array<Region>,
-        private val fragment: Fragment,
+    private val regions: Array<Region>,
+    private val fragment: Fragment,
 ) : RecyclerView.Adapter<RegionAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListItemRegionBinding) : RecyclerView.ViewHolder(binding.root)
@@ -31,12 +31,14 @@ class RegionAdapter(
         holder.binding.viewModel = RegionListItemViewModel(regions[position])
         holder.binding.regionName.setOnClickListener {
             fragment.setFragmentResult(
-                    requestKey = REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST,
-                    result = bundleOf(BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
-                            to regions[position].id)
+                requestKey = REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST,
+                result = bundleOf(
+                    BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
+                            to regions[position].id
+                )
             )
             fragment.findNavController()
-                    .navigate(R.id.action_regionListFragment_to_routeListFragment)
+                .navigate(R.id.action_regionListFragment_to_routeListFragment)
         }
     }
 

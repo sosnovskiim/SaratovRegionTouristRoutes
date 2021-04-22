@@ -23,12 +23,12 @@ class RouteListFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         fragmentRouteListBinding =
-                FragmentRouteListBinding.inflate(inflater, container, false)
+            FragmentRouteListBinding.inflate(inflater, container, false)
         return fragmentRouteListBinding.root
     }
 
@@ -39,13 +39,13 @@ class RouteListFragment : Fragment() {
         fragmentRouteListBinding.routeList.layoutManager = linearLayoutManager
 
         val routeListAdapter = RouteAdapter(
-                routes = routeListViewModel.routes,
-                fragment = this,
+            routes = routeListViewModel.routes,
+            fragment = this,
         )
         fragmentRouteListBinding.routeList.adapter = routeListAdapter
 
         setFragmentResultListener(
-                requestKey = REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
+            requestKey = REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
         ) { _, bundle ->
             val regionId: Long = bundle.getLong(BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST)
             routeListViewModel.initRoutes(regionId = regionId)

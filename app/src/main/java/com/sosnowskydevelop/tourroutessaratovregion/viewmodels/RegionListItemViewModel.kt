@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.sosnowskydevelop.tourroutessaratovregion.data.Region
 
 class RegionListItemViewModel(
-    private val region: Region
+    private val region: Region,
 ) : ViewModel() {
     val regionName: String
         get() {

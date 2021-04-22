@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListItemViewModel"/>
+            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListItemViewModel" />
     </data>
 
     <TextView
         android:id="@+id/routeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{viewModel.routeName}"
-        android:textSize="24sp"
         android:gravity="center"
         android:padding="8dp"
-        tools:text="Краеведческий музей, село Ровное, Саратовская область"/>
+        android:text="@{viewModel.routeName}"
+        android:textSize="24sp"
+        tools:text="Краеведческий музей, село Ровное, Саратовская область" />
 
 </layout>

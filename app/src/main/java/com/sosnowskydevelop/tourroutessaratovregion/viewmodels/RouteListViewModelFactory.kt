@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
 
 class RouteListViewModelFactory(
-        private val routeRepository: RouteRepository,
+    private val routeRepository: RouteRepository,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
