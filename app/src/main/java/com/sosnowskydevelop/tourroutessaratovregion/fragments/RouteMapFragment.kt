@@ -10,17 +10,24 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import com.sosnowskydevelop.tourroutessaratovregion.adapters.MapMarkerInfoWindow
 import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePoint
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRouteMapBinding
-import com.sosnowskydevelop.tourroutessaratovregion.utilities.*
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.BUNDLE_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.InjectorUtils
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.REQUEST_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteMapViewModel
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.infowindow.InfoWindow
 
-class RouteMapFragment : Fragment() {
+
+class RouteMapFragment : Fragment(), MapEventsReceiver {
     private lateinit var fragmentRouteMapBinding: FragmentRouteMapBinding
 
     private val routeMapViewModel: RouteMapViewModel by viewModels {
@@ -62,6 +69,8 @@ class RouteMapFragment : Fragment() {
     private fun initMap() {
         initPreferences()
 
+        val mapEventsOverlay = MapEventsOverlay(this)
+        fragmentRouteMapBinding.routeMap.overlays.add(0, mapEventsOverlay)
         fragmentRouteMapBinding.routeMap.setTileSource(TileSourceFactory.MAPNIK)
         fragmentRouteMapBinding.routeMap.setBuiltInZoomControls(true)
         fragmentRouteMapBinding.routeMap.setMultiTouchControls(true)
@@ -74,6 +83,7 @@ class RouteMapFragment : Fragment() {
             isStartPoint = true,
             routeGeoPoint = GeoPoint(routeStartPoint.latitude, routeStartPoint.longitude),
             routePointName = routeStartPoint.name,
+            routePointPage = routeStartPoint.page,
         )
 
         val routeIntermediatePoints: Array<RoutePoint>? =
@@ -82,6 +92,7 @@ class RouteMapFragment : Fragment() {
             addMarkerToMap(
                 routeGeoPoint = GeoPoint(routePoint.latitude, routePoint.longitude),
                 routePointName = routePoint.name,
+                routePointPage = routePoint.page,
             )
         }
 
@@ -90,6 +101,7 @@ class RouteMapFragment : Fragment() {
             addMarkerToMap(
                 routeGeoPoint = GeoPoint(routeEndPoint.latitude, routeEndPoint.longitude),
                 routePointName = routeEndPoint.name,
+                routePointPage = routeEndPoint.page,
             )
         }
     }
@@ -107,13 +119,19 @@ class RouteMapFragment : Fragment() {
         isStartPoint: Boolean = false,
         routeGeoPoint: GeoPoint,
         routePointName: String?,
+        routePointPage: Int,
     ) {
         geoPoints.add(routeGeoPoint)
         val marker = Marker(fragmentRouteMapBinding.routeMap)
         marker.position = routeGeoPoint
-        marker.title = routePointName
         /*TODO Experiment with Marker.setAnchor().*/
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+        marker.infoWindow = MapMarkerInfoWindow(
+            mapView = fragmentRouteMapBinding.routeMap,
+            fragment = this,
+            routePointName = routePointName,
+            routePointPage = routePointPage,
+        )
         fragmentRouteMapBinding.routeMap.overlays.add(marker)
         fragmentRouteMapBinding.routeMap.invalidate()
         if (isStartPoint) mapController.setCenter(routeGeoPoint)
@@ -127,5 +145,14 @@ class RouteMapFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         fragmentRouteMapBinding.routeMap.onPause()
+    }
+
+    override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+        InfoWindow.closeAllInfoWindowsOn(fragmentRouteMapBinding.routeMap)
+        return true
+    }
+
+    override fun longPressHelper(p: GeoPoint?): Boolean {
+        return false
     }
 }

@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    // PDF
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     // OSM
     implementation 'org.osmdroid:osmdroid-android:6.1.2'
     implementation 'com.github.MKergall:osmbonuspack:6.6.0'

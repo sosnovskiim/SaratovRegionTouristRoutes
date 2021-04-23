@@ -1,5 +1,7 @@
 package com.sosnowskydevelop.tourroutessaratovregion.data
 
+import org.osmdroid.views.MapView
+
 data class Route(
     private val _id: Long,
     private val _regionId: Long,
@@ -7,7 +9,6 @@ data class Route(
     private val _school: String,
     private val _leaders: Array<String>? = null,
     private val _name: String,
-    private val _routeMap: RouteMap,
 ) {
     val id: Long get() = _id
     val regionId: Long get() = _regionId
@@ -15,5 +16,4 @@ data class Route(
     val school: String get() = _school
     val leaders: Array<String>? get() = _leaders
     val name: String get() = _name
-    val routeMap: RouteMap get() = _routeMap
 }

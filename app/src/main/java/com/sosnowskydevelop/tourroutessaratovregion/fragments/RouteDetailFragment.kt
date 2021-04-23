@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRouteDetailBinding
@@ -18,9 +18,9 @@ import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteDetailViewMo
 class RouteDetailFragment : Fragment() {
     private lateinit var fragmentRouteDetailBinding: FragmentRouteDetailBinding
 
-    private val routeDetailViewModel: RouteDetailViewModel by viewModels {
-        InjectorUtils.provideRouteDetailViewModelFactory()
-    }
+    private lateinit var routeDetailViewModel: RouteDetailViewModel
+
+    private var currentPage: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,11 @@ class RouteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        routeDetailViewModel = ViewModelProvider(
+            requireActivity(),
+            InjectorUtils.provideRouteDetailViewModelFactory()
+        ).get(RouteDetailViewModel::class.java)
+
         fragmentRouteDetailBinding.viewModel = routeDetailViewModel
 
         setFragmentResultListener(
@@ -48,6 +53,14 @@ class RouteDetailFragment : Fragment() {
         ) { _, bundle ->
             val routeId: Long = bundle.getLong(BUNDLE_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL)
             routeDetailViewModel.initDetails(routeId = routeId)
+            onResume()
+        }
+        setFragmentResultListener(
+            requestKey = REQUEST_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL
+        ) { _, bundle ->
+            val page: Int = bundle.getInt(BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL)
+            currentPage = page
+            onResume()
         }
     }
 
@@ -70,5 +83,13 @@ class RouteDetailFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fragmentRouteDetailBinding.routeDetail
+            .fromStream(resources.openRawResource(R.raw.sample))
+            .defaultPage(currentPage)
+            .load()
     }
 }
