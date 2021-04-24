@@ -3,9 +3,11 @@ package com.sosnowskydevelop.tourroutessaratovregion.fragments
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -25,7 +27,6 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.infowindow.InfoWindow
-
 
 class RouteMapFragment : Fragment(), MapEventsReceiver {
     private lateinit var fragmentRouteMapBinding: FragmentRouteMapBinding
@@ -81,27 +82,21 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         val routeStartPoint: RoutePoint = routeMapViewModel.routeStartPoint
         addMarkerToMap(
             isStartPoint = true,
-            routeGeoPoint = GeoPoint(routeStartPoint.latitude, routeStartPoint.longitude),
-            routePointName = routeStartPoint.name,
-            routePointPage = routeStartPoint.page,
+            routePoint = routeStartPoint,
         )
 
         val routeIntermediatePoints: Array<RoutePoint>? =
             routeMapViewModel.routeIntermediatePoints
         routeIntermediatePoints?.forEach { routePoint ->
             addMarkerToMap(
-                routeGeoPoint = GeoPoint(routePoint.latitude, routePoint.longitude),
-                routePointName = routePoint.name,
-                routePointPage = routePoint.page,
+                routePoint = routePoint,
             )
         }
 
         val routeEndPoint: RoutePoint? = routeMapViewModel.routeEndPoint
         if (routeEndPoint != null) {
             addMarkerToMap(
-                routeGeoPoint = GeoPoint(routeEndPoint.latitude, routeEndPoint.longitude),
-                routePointName = routeEndPoint.name,
-                routePointPage = routeEndPoint.page,
+                routePoint = routeEndPoint,
             )
         }
     }
@@ -117,10 +112,9 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
 
     private fun addMarkerToMap(
         isStartPoint: Boolean = false,
-        routeGeoPoint: GeoPoint,
-        routePointName: String?,
-        routePointPage: Int,
+        routePoint: RoutePoint,
     ) {
+        val routeGeoPoint = GeoPoint(routePoint.latitude, routePoint.longitude)
         geoPoints.add(routeGeoPoint)
         val marker = Marker(fragmentRouteMapBinding.routeMap)
         marker.position = routeGeoPoint
@@ -129,8 +123,7 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         marker.infoWindow = MapMarkerInfoWindow(
             mapView = fragmentRouteMapBinding.routeMap,
             fragment = this,
-            routePointName = routePointName,
-            routePointPage = routePointPage,
+            routePoint = routePoint,
         )
         fragmentRouteMapBinding.routeMap.overlays.add(marker)
         fragmentRouteMapBinding.routeMap.invalidate()

@@ -65,7 +65,7 @@ class RouteDetailFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_map, menu)
+        inflater.inflate(R.menu.menu_route_detail, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

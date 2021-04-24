@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:padding="8dp"
-    android:background="@color/background">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/markerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:textColor="@color/black" />
 
     <Space
         android:layout_width="match_parent"
@@ -18,9 +19,17 @@
         android:layout_weight="1" />
 
     <Button
+        android:id="@+id/pointExport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поехали!"
+        android:textSize="8sp" />
+
+    <Button
         android:id="@+id/gotoDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Перейти к описанию"/>
+        android:text="Перейти к описанию"
+        android:textSize="8sp" />
 
 </LinearLayout>
