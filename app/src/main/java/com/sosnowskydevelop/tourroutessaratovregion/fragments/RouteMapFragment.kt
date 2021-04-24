@@ -1,17 +1,22 @@
 package com.sosnowskydevelop.tourroutessaratovregion.fragments
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.adapters.MapMarkerInfoWindow
 import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePoint
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRouteMapBinding
@@ -38,6 +43,46 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_route_map, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_export -> {
+                var stringUri = "yandexnavi://build_route_on_map?"
+                if (routeMapViewModel.routeEndPoint != null) {
+                    stringUri += "lat_to=${routeMapViewModel.routeEndPoint!!.latitude}" +
+                            "&lon_to=${routeMapViewModel.routeEndPoint!!.longitude}"
+                    if (routeMapViewModel.routeIntermediatePoints != null) {
+                        routeMapViewModel.routeIntermediatePoints!!
+                            .forEachIndexed { index, routePoint ->
+                                stringUri += "&lat_via_${index}=${routePoint.latitude}" +
+                                        "&lon_via_${index}=${routePoint.longitude}"
+                            }
+                    }
+                } else {
+                    stringUri += "lat_to=${routeMapViewModel.routeStartPoint.latitude}" +
+                            "&lon_to=${routeMapViewModel.routeStartPoint.longitude}"
+                }
+                val uri: Uri = Uri.parse(stringUri)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.setPackage("ru.yandex.yandexnavi")
+                try {
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Приложение Яндекс.Навигатор не найдено",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(

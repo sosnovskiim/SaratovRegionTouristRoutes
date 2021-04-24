@@ -27,6 +27,27 @@ class RouteDetailFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_route_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_map -> {
+                setFragmentResult(
+                    requestKey = REQUEST_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP,
+                    result = bundleOf(
+                        BUNDLE_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP
+                                to routeDetailViewModel.routeId
+                    )
+                )
+                findNavController().navigate(R.id.action_routeDetailFragment_to_routeMapFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,27 +82,6 @@ class RouteDetailFragment : Fragment() {
             val page: Int = bundle.getInt(BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL)
             currentPage = page
             onResume()
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_route_detail, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_map -> {
-                setFragmentResult(
-                    requestKey = REQUEST_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP,
-                    result = bundleOf(
-                        BUNDLE_KEY_ROUTE_ID_ROUTE_DETAIL_TO_ROUTE_MAP
-                                to routeDetailViewModel.routeId
-                    )
-                )
-                findNavController().navigate(R.id.action_routeDetailFragment_to_routeMapFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 

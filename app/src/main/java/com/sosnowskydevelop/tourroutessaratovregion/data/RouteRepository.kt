@@ -62,16 +62,6 @@ class RouteRepository {
                 _longitude = 48.13344970101825,
                 _page = 1,
             ),
-            _intermediatePoints = arrayOf(
-                RoutePoint(
-                    _id = 3,
-                    _routeId = 1,
-                    _latitude = 50.460852,
-                    _longitude = 48.138621,
-                    _name = "Краеведческий музей, г.Новоузенск",
-                    _page = 2,
-                ),
-            ),
         ),
         RouteMap(
             _id = 2,
@@ -82,7 +72,7 @@ class RouteRepository {
                 _latitude = 50.47716416155355,
                 _longitude = 48.10918588687836,
                 _name = "г.Новоузенск",
-                _page = 3,
+                _page = 2,
             ),
         ),
         RouteMap(

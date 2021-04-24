@@ -39,7 +39,11 @@ class MapMarkerInfoWindow(
         }
 
         pointExport.setOnClickListener {
-            val uri: Uri = Uri.parse("yandexnavi://build_route_on_map?lat_to=${routePoint.latitude}&lon_to=${routePoint.longitude}")
+            val uri: Uri = Uri.parse(
+                "yandexnavi://build_route_on_map?" +
+                        "lat_to=${routePoint.latitude}" +
+                        "&lon_to=${routePoint.longitude}"
+            )
             val intent = Intent(Intent.ACTION_VIEW, uri)
             try {
                 startActivity(fragment.requireContext(), intent, null)
