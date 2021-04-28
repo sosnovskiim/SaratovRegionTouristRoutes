@@ -4,7 +4,6 @@ data class Region(
     private val _id: Long,
     private val _name: String,
     /* Images
-    Map of the Saratov region, on which the region is highlighted.
     TODO private val _ratioMap: ?,
     TODO private val _emblem: ?,
     TODO private val _map: ?,

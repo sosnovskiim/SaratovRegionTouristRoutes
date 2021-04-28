@@ -1,6 +1,7 @@
 package com.sosnowskydevelop.tourroutessaratovregion.utilities
 
 import com.sosnowskydevelop.tourroutessaratovregion.data.RegionRepository
+import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePointRepository
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListViewModelFactory
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteDetailViewModelFactory
@@ -11,6 +12,8 @@ object InjectorUtils {
     private fun getRegionRepository() = RegionRepository.getInstance()
 
     private fun getRouteRepository() = RouteRepository.getInstance()
+
+    private fun getRoutePointRepository() = RoutePointRepository.getInstance()
 
     fun provideRegionListViewModelFactory() = RegionListViewModelFactory(
         regionRepository = getRegionRepository(),
@@ -26,6 +29,6 @@ object InjectorUtils {
     )
 
     fun provideRouteMapViewModelFactory() = RouteMapViewModelFactory(
-        routeRepository = getRouteRepository(),
+        routePointRepository = getRoutePointRepository(),
     )
 }

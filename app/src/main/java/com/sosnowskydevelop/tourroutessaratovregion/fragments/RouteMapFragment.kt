@@ -9,13 +9,9 @@ import android.preference.PreferenceManager
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.adapters.MapMarkerInfoWindow
 import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePoint
@@ -124,24 +120,20 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         mapController = fragmentRouteMapBinding.routeMap.controller
         mapController.setZoom(12.0)
 
-        val routeStartPoint: RoutePoint = routeMapViewModel.routeStartPoint
         addMarkerToMap(
             isStartPoint = true,
-            routePoint = routeStartPoint,
+            routePoint = routeMapViewModel.routeStartPoint,
         )
 
-        val routeIntermediatePoints: Array<RoutePoint>? =
-            routeMapViewModel.routeIntermediatePoints
-        routeIntermediatePoints?.forEach { routePoint ->
+        if (routeMapViewModel.routeEndPoint != null) {
             addMarkerToMap(
-                routePoint = routePoint,
+                routePoint = routeMapViewModel.routeEndPoint!!,
             )
         }
 
-        val routeEndPoint: RoutePoint? = routeMapViewModel.routeEndPoint
-        if (routeEndPoint != null) {
+        routeMapViewModel.routeIntermediatePoints?.forEach { routePoint ->
             addMarkerToMap(
-                routePoint = routeEndPoint,
+                routePoint = routePoint,
             )
         }
     }

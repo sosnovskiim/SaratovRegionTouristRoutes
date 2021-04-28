@@ -83,7 +83,7 @@ class RouteDetailFragment : Fragment() {
             requestKey = REQUEST_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL
         ) { _, bundle ->
             val page: Int = bundle.getInt(BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL)
-            currentPage = page
+            currentPage = page - 1
             onResume()
         }
     }
