@@ -9,6 +9,8 @@ class RegionListViewModelFactory(
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return RegionListViewModel(regionRepository = regionRepository) as T
+        return RegionListViewModel(
+            regionRepository = regionRepository,
+        ) as T
     }
 }

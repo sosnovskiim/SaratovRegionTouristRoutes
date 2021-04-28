@@ -1,5 +1,8 @@
 package com.sosnowskydevelop.tourroutessaratovregion.data
 
+/*
+TODO Not needed
+ */
 data class RouteMap(
     private val _id: Long,
     private val _routeId: Long,

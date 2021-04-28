@@ -9,6 +9,8 @@ class RouteDetailViewModelFactory(
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return RouteDetailViewModel(routeRepository = routeRepository) as T
+        return RouteDetailViewModel(
+            routeRepository = routeRepository,
+        ) as T
     }
 }

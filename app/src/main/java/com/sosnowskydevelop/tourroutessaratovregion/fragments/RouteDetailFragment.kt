@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -74,6 +75,8 @@ class RouteDetailFragment : Fragment() {
         ) { _, bundle ->
             val routeId: Long = bundle.getLong(BUNDLE_KEY_ROUTE_ID_ROUTE_LIST_TO_ROUTE_DETAIL)
             routeDetailViewModel.initDetails(routeId = routeId)
+            (requireActivity() as AppCompatActivity).supportActionBar?.title =
+                routeDetailViewModel.routeName
             onResume()
         }
         setFragmentResultListener(

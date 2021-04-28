@@ -5,39 +5,39 @@ class RouteRepository {
         22L to arrayOf(
             Route(
                 _id = 1, _regionId = 22,
-                _authors = arrayOf(
-                    "Чижикова Валентина",
-                ),
-                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
-                _leaders = arrayOf(
-                    "Сосновская Регина Леонидовна, учитель биологии"
-                ),
+//                _authors = arrayOf(
+//                    "Чижикова Валентина",
+//                ),
+//                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
+//                _leaders = arrayOf(
+//                    "Сосновская Регина Леонидовна, учитель биологии"
+//                ),
                 _name = "Новоузенский район - 1",
             ),
             Route(
                 _id = 2, _regionId = 22,
-                _authors = arrayOf(
-                    "Чижикова Валентина",
-                ),
-                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
+//                _authors = arrayOf(
+//                    "Чижикова Валентина",
+//                ),
+//                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
                 _name = "Новоузенский район - 2",
             ),
         ),
         28L to arrayOf(
             Route(
                 _id = 3, _regionId = 28,
-                _authors = arrayOf(
-                    "Чижикова Валентина, 9 класс",
-                ),
-                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
+//                _authors = arrayOf(
+//                    "Чижикова Валентина, 9 класс",
+//                ),
+//                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
                 _name = "Ровенский-1",
             ),
             Route(
                 _id = 4, _regionId = 28,
-                _authors = arrayOf(
-                    "Чижикова Валентина, 9 класс",
-                ),
-                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
+//                _authors = arrayOf(
+//                    "Чижикова Валентина, 9 класс",
+//                ),
+//                _school = "МАОУ \"ФТЛ №1\" г.Саратова",
                 _name = "Ровенский-2",
             ),
         ),
@@ -176,7 +176,7 @@ class RouteRepository {
         routes.values.forEach {
             it.forEach { route ->
                 if (routeId == route.id) {
-                    return routeMaps[(routeId - 1).toInt()]
+                    return routeMaps[routeId.toInt() - 1]
                 }
             }
         }

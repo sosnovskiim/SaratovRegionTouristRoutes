@@ -8,11 +8,10 @@ class RouteDetailViewModel(
     private val routeRepository: RouteRepository,
 ) : ViewModel() {
     private lateinit var route: Route
-
-    var routeId: Long = 0
+    val routeId: Long get() = route.id
+    val routeName: String get() = route.name
 
     fun initDetails(routeId: Long) {
         route = routeRepository.getRoute(routeId = routeId)!!
-        this.routeId = route.id
     }
 }
