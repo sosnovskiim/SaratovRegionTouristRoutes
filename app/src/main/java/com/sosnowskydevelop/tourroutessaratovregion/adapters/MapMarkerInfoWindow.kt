@@ -32,11 +32,7 @@ class MapMarkerInfoWindow(
         val pointExport: Button = mView.findViewById(R.id.pointExport)
         val gotoDetail: Button = mView.findViewById(R.id.gotoDetail)
 
-        if (routePoint.name != null) {
-            markerName.text = routePoint.name
-        } else {
-            markerName.text = "Без названия"
-        }
+        markerName.text = routePoint.name
 
         pointExport.setOnClickListener {
             val uri: Uri = Uri.parse(

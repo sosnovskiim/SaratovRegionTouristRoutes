@@ -3,7 +3,7 @@ package com.sosnowskydevelop.tourroutessaratovregion.data
 data class RoutePoint(
     private val _id: Long,
     private val _routeId: Long,
-    private val _name: String? = null,
+    private val _name: String,
     /* Start/End/Intermediate
     TODO private val _type: ?,
      */
@@ -13,7 +13,7 @@ data class RoutePoint(
 ) {
     val id: Long get() = _id
     val routeId: Long get() = _routeId
-    val name: String? get() = _name
+    val name: String get() = _name
     /*
     TODO val type: ? get() = _type
      */
