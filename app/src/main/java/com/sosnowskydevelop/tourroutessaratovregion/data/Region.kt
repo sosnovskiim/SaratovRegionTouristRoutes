@@ -3,17 +3,9 @@ package com.sosnowskydevelop.tourroutessaratovregion.data
 data class Region(
     private val _id: Long,
     private val _name: String,
-    /* Images
-    TODO private val _ratioMap: ?,
-    TODO private val _emblem: ?,
-    TODO private val _map: ?,
-     */
+    private val _fileName: String,
 ) {
     val id: Long get() = _id
     val name: String get() = _name
-    /*
-    TODO val ratioMap: ? get() = _ratioMap
-    TODO val emblem: ? get() = _emblem
-    TODO val map: ? get() = _map
-     */
+    val fileName: String get() = _fileName
 }

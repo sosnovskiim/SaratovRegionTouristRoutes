@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -21,7 +20,7 @@ class RouteListFragment : Fragment() {
     private lateinit var fragmentRouteListBinding: FragmentRouteListBinding
 
     private val routeListViewModel: RouteListViewModel by viewModels {
-        InjectorUtils.provideRouteListViewModelFactory()
+        InjectorUtils.provideRouteListViewModelFactory(requireContext())
     }
 
     override fun onCreateView(
@@ -52,14 +51,44 @@ class RouteListFragment : Fragment() {
             val regionId: Long = bundle.getLong(BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST)
             routeListViewModel.initRoutes(regionId = regionId)
             routeListAdapter.routes = routeListViewModel.routes
-
-            (requireActivity() as AppCompatActivity).supportActionBar?.title =
-                routeListViewModel.regionName
+            subscribeUI()
         }
 
-        if (routeListViewModel.regionName != null) {
-            (requireActivity() as AppCompatActivity).supportActionBar?.title =
-                routeListViewModel.regionName
-        }
+        if (routeListViewModel.regionName != null) subscribeRegionName()
+        if (routeListViewModel.regionFileName != null) subscribeRegionImages()
+    }
+
+    private fun subscribeUI() {
+        subscribeRegionName()
+        subscribeRegionImages()
+    }
+
+    private fun subscribeRegionName() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.title =
+            routeListViewModel.regionName
+    }
+
+    private fun subscribeRegionImages() {
+        fragmentRouteListBinding.regionRatioMap.setImageResource(
+            resources.getIdentifier(
+                "region_ratio_map_${routeListViewModel.regionFileName}",
+                "drawable",
+                "com.sosnowskydevelop.tourroutessaratovregion"
+            )
+        )
+        fragmentRouteListBinding.regionEmblem.setImageResource(
+            resources.getIdentifier(
+                "region_emblem_${routeListViewModel.regionFileName}",
+                "drawable",
+                "com.sosnowskydevelop.tourroutessaratovregion"
+            )
+        )
+        fragmentRouteListBinding.regionMap.setImageResource(
+            resources.getIdentifier(
+                "region_map_${routeListViewModel.regionFileName}",
+                "drawable",
+                "com.sosnowskydevelop.tourroutessaratovregion"
+            )
+        )
     }
 }

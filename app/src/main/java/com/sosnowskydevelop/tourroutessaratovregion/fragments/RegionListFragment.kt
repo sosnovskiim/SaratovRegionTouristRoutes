@@ -17,7 +17,7 @@ class RegionListFragment : Fragment() {
     private lateinit var fragmentRegionListBinding: FragmentRegionListBinding
 
     private val regionListViewModel: RegionListViewModel by viewModels {
-        InjectorUtils.provideRegionListViewModelFactory()
+        InjectorUtils.provideRegionListViewModelFactory(requireContext())
     }
 
     override fun onCreateView(

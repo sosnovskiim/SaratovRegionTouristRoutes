@@ -7,5 +7,5 @@ import com.sosnowskydevelop.tourroutessaratovregion.data.RegionRepository
 class RegionListViewModel(
     regionRepository: RegionRepository,
 ) : ViewModel() {
-    val regions: Array<Region> = regionRepository.getRegions()
+    var regions: Array<Region> = regionRepository.getRegions()
 }
