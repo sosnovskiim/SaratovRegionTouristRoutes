@@ -13,7 +13,8 @@ object InjectorUtils {
     private fun getRegionRepository(context: Context) =
         RegionRepository.getInstance(context = context)
 
-    private fun getRouteRepository() = RouteRepository.getInstance()
+    private fun getRouteRepository(context: Context) =
+        RouteRepository.getInstance(context = context)
 
     private fun getRoutePointRepository() = RoutePointRepository.getInstance()
 
@@ -23,11 +24,11 @@ object InjectorUtils {
 
     fun provideRouteListViewModelFactory(context: Context) = RouteListViewModelFactory(
         regionRepository = getRegionRepository(context = context),
-        routeRepository = getRouteRepository(),
+        routeRepository = getRouteRepository(context = context),
     )
 
-    fun provideRouteDetailViewModelFactory() = RouteDetailViewModelFactory(
-        routeRepository = getRouteRepository(),
+    fun provideRouteDetailViewModelFactory(context: Context) = RouteDetailViewModelFactory(
+        routeRepository = getRouteRepository(context = context),
     )
 
     fun provideRouteMapViewModelFactory() = RouteMapViewModelFactory(

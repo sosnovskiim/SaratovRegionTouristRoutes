@@ -65,7 +65,7 @@ class RouteDetailFragment : Fragment() {
 
         routeDetailViewModel = ViewModelProvider(
             requireActivity(),
-            InjectorUtils.provideRouteDetailViewModelFactory()
+            InjectorUtils.provideRouteDetailViewModelFactory(context = requireContext())
         ).get(RouteDetailViewModel::class.java)
 
         fragmentRouteDetailBinding.viewModel = routeDetailViewModel
@@ -91,7 +91,15 @@ class RouteDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         fragmentRouteDetailBinding.routeDetail
-            .fromStream(resources.openRawResource(R.raw.sample))
+            .fromStream(
+                resources.openRawResource(
+                    resources.getIdentifier(
+                        routeDetailViewModel.routeFileName,
+                        "raw",
+                        "com.sosnowskydevelop.tourroutessaratovregion"
+                    )
+                )
+            )
             .defaultPage(currentPage)
             .load()
     }
