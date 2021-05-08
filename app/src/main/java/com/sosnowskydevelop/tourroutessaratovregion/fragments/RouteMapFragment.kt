@@ -33,7 +33,7 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
     private lateinit var fragmentRouteMapBinding: FragmentRouteMapBinding
 
     private val routeMapViewModel: RouteMapViewModel by viewModels {
-        InjectorUtils.provideRouteMapViewModelFactory()
+        InjectorUtils.provideRouteMapViewModelFactory(context = requireContext())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,8 +60,8 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
                             }
                     }
                 } else {
-                    stringUri += "lat_to=${routeMapViewModel.routeStartPoint.latitude}" +
-                            "&lon_to=${routeMapViewModel.routeStartPoint.longitude}"
+                    stringUri += "lat_to=${routeMapViewModel.routeStartPoint?.latitude}" +
+                            "&lon_to=${routeMapViewModel.routeStartPoint?.longitude}"
                 }
                 val uri: Uri = Uri.parse(stringUri)
                 val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -122,7 +122,7 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
 
         addMarkerToMap(
             isStartPoint = true,
-            routePoint = routeMapViewModel.routeStartPoint,
+            routePoint = routeMapViewModel.routeStartPoint!!,
         )
 
         if (routeMapViewModel.routeEndPoint != null) {

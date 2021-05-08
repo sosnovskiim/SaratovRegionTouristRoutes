@@ -7,13 +7,26 @@ import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePointRepository
 class RouteMapViewModel(
     private val routePointRepository: RoutePointRepository,
 ) : ViewModel() {
-    lateinit var routeStartPoint: RoutePoint
-    var routeIntermediatePoints: Array<RoutePoint>? = null
-    var routeEndPoint: RoutePoint? = null
+    private lateinit var routePoints: Array<RoutePoint>
+    val routeStartPoint: RoutePoint get() = routePoints.first()
+    val routeIntermediatePoints: Array<RoutePoint>?
+        get() {
+            return if (routePoints.size > 2) {
+                routePoints.copyOfRange(1, routePoints.lastIndex)
+            } else {
+                null
+            }
+        }
+    val routeEndPoint: RoutePoint?
+        get() {
+            return if (routePoints.size > 1) {
+                routePoints.last()
+            } else {
+                null
+            }
+        }
 
     fun initDetails(routeId: Long) {
-        routeStartPoint = routePointRepository.getStartPoint(routeId = routeId)
-        routeIntermediatePoints = routePointRepository.getIntermediatePoints(routeId = routeId)
-        routeEndPoint = routePointRepository.getEndPoint(routeId = routeId)
+        routePoints = routePointRepository.getRoutePoints(routeId = routeId)
     }
 }
