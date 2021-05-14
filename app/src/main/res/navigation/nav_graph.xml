@@ -15,7 +15,17 @@
             android:id="@+id/action_regionListFragment_to_routeListFragment"
             app:destination="@id/routeListFragment" />
 
+        <action
+            android:id="@+id/action_regionListFragment_to_routeSearchFragment"
+            app:destination="@id/routeSearchFragment" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/routeSearchFragment"
+        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteSearchFragment"
+        android:label="RouteSearchFragment"
+        tools:layout="@layout/fragment_route_search" />
 
     <fragment
         android:id="@+id/routeListFragment"
@@ -26,6 +36,10 @@
         <action
             android:id="@+id/action_routeListFragment_to_routeDetailFragment"
             app:destination="@id/routeDetailFragment" />
+
+        <action
+            android:id="@+id/action_routeListFragment_to_routeSearchFragment"
+            app:destination="@id/routeSearchFragment" />
 
     </fragment>
 

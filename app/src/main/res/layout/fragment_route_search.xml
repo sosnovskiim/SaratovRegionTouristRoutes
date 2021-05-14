@@ -8,25 +8,24 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-        <TextView
+        <EditText
             android:id="@+id/routeSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Поиск маршрутов по области"
-            app:layout_constraintBottom_toTopOf="@id/regionList"
+            app:layout_constraintBottom_toTopOf="@id/routeList"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/regionList"
+            android:id="@+id/routeList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/routeSearch"
-            tools:listitem="@layout/list_item_region" />
+            tools:listitem="@layout/list_item_route" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,7 +20,7 @@ class RouteListFragment : Fragment() {
     private lateinit var fragmentRouteListBinding: FragmentRouteListBinding
 
     private val routeListViewModel: RouteListViewModel by viewModels {
-        InjectorUtils.provideRouteListViewModelFactory(requireContext())
+        InjectorUtils.provideRouteListViewModelFactory(context = requireContext())
     }
 
     override fun onCreateView(

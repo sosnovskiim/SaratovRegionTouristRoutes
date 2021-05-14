@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.adapters.RegionAdapter
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRegionListBinding
 import com.sosnowskydevelop.tourroutessaratovregion.utilities.InjectorUtils
@@ -17,7 +19,7 @@ class RegionListFragment : Fragment() {
     private lateinit var fragmentRegionListBinding: FragmentRegionListBinding
 
     private val regionListViewModel: RegionListViewModel by viewModels {
-        InjectorUtils.provideRegionListViewModelFactory(requireContext())
+        InjectorUtils.provideRegionListViewModelFactory(context = requireContext())
     }
 
     override fun onCreateView(
@@ -32,6 +34,10 @@ class RegionListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        fragmentRegionListBinding.routeSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_regionListFragment_to_routeSearchFragment)
+        }
 
         val linearLayoutManager = LinearLayoutManager(requireContext())
         fragmentRegionListBinding.regionList.layoutManager = linearLayoutManager

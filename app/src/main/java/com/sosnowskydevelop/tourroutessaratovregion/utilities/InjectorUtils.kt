@@ -4,10 +4,7 @@ import android.content.Context
 import com.sosnowskydevelop.tourroutessaratovregion.data.RegionRepository
 import com.sosnowskydevelop.tourroutessaratovregion.data.RoutePointRepository
 import com.sosnowskydevelop.tourroutessaratovregion.data.RouteRepository
-import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListViewModelFactory
-import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteDetailViewModelFactory
-import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListViewModelFactory
-import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteMapViewModelFactory
+import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.*
 
 object InjectorUtils {
     private fun getRegionRepository(context: Context) =
@@ -21,6 +18,10 @@ object InjectorUtils {
 
     fun provideRegionListViewModelFactory(context: Context) = RegionListViewModelFactory(
         regionRepository = getRegionRepository(context = context),
+    )
+
+    fun provideRouteSearchViewModelFactory(context: Context) = RouteSearchViewModelFactory(
+        routeRepository = getRouteRepository(context = context),
     )
 
     fun provideRouteListViewModelFactory(context: Context) = RouteListViewModelFactory(
