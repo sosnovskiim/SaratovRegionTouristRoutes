@@ -17,6 +17,6 @@
         android:padding="8dp"
         android:text="@{viewModel.routeName}"
         android:textSize="24sp"
-        tools:text="Краеведческий музей, село Ровное, Саратовская область" />
+        tools:text="Название туристического маршрута" />
 
 </layout>

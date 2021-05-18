@@ -8,11 +8,11 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-        <TextView
+        <EditText
             android:id="@+id/routeSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Поиск маршрутов по области"
+            android:hint="Поиск маршрутов по области"
             app:layout_constraintBottom_toTopOf="@id/regionList"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -22,11 +22,35 @@
             android:id="@+id/regionList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/routeSearch"
             tools:listitem="@layout/list_item_region" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routeList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/routeSearch"
+            tools:listitem="@layout/list_item_route" />
+
+        <TextView
+            android:id="@+id/nothingFound"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:gravity="top"
+            android:text="Ничего не найдено"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/routeSearch" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -57,7 +57,7 @@ class RouteRepository(context: Context) {
 
     fun getRoutesBySearchQuery(searchQuery: String): Array<Route> {
         var result: Array<Route> = arrayOf()
-        var cursor: Cursor = database.rawQuery(
+        val cursor: Cursor = database.rawQuery(
             "SELECT * FROM Route where _name LIKE '%$searchQuery%'", null
         )
         var isEntryNotEmpty: Boolean = cursor.moveToFirst()
