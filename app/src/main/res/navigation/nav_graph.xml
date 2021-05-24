@@ -12,16 +12,30 @@
         tools:layout="@layout/fragment_region_list">
 
         <action
+            android:id="@+id/action_regionListFragment_to_routeSearchFragment"
+            app:destination="@id/routeSearchFragment" />
+
+        <action
             android:id="@+id/action_regionListFragment_to_routeListFragment"
             app:destination="@id/routeListFragment" />
 
     </fragment>
 
     <fragment
+        android:id="@+id/routeSearchFragment"
+        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteSearchFragment"
+        android:label="RouteSearchFragment"
+        tools:layout="@layout/fragment_route_search" />
+
+    <fragment
         android:id="@+id/routeListFragment"
         android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteListFragment"
         android:label="RouteListFragment"
         tools:layout="@layout/fragment_route_list">
+
+        <action
+            android:id="@+id/action_routeListFragment_to_routeSearchFragment"
+            app:destination="@id/routeSearchFragment" />
 
         <action
             android:id="@+id/action_routeListFragment_to_routeDetailFragment"

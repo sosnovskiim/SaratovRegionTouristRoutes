@@ -11,9 +11,10 @@ class RouteListViewModel(
     private val routeRepository: RouteRepository,
 ) : ViewModel() {
     private var region: Region? = null
+    val regionId: Long? get() = region?.id
     val regionName: String? get() = region?.name
     val regionFileName: String? get() = region?.fileName
-    var routes: Array<Route> = routeRepository.getRoutes(regionId = 0)
+    var routes: Array<Route> = arrayOf()
 
     fun initRoutes(regionId: Long) {
         region = regionRepository.getRegion(regionId = regionId)

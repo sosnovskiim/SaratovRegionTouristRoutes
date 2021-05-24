@@ -17,6 +17,6 @@
         android:padding="8dp"
         android:text="@{viewModel.regionName}"
         android:textSize="24sp"
-        tools:text="Базарно-Карабулакский район" />
+        tools:text="Название района" />
 
 </layout>

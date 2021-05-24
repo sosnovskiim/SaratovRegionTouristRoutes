@@ -42,7 +42,7 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_route_map, menu)
+        inflater.inflate(R.menu.menu_route_export, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

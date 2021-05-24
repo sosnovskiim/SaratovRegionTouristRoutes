@@ -18,6 +18,9 @@ object InjectorUtils {
 
     fun provideRegionListViewModelFactory(context: Context) = RegionListViewModelFactory(
         regionRepository = getRegionRepository(context = context),
+    )
+
+    fun provideRouteSearchViewModelFactory(context: Context) = RouteSearchViewModelFactory(
         routeRepository = getRouteRepository(context = context),
     )
 

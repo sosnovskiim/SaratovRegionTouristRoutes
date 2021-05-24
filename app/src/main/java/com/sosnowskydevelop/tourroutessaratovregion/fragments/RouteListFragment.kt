@@ -1,19 +1,19 @@
 package com.sosnowskydevelop.tourroutessaratovregion.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.adapters.RouteAdapter
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRouteListBinding
-import com.sosnowskydevelop.tourroutessaratovregion.utilities.BUNDLE_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
-import com.sosnowskydevelop.tourroutessaratovregion.utilities.InjectorUtils
-import com.sosnowskydevelop.tourroutessaratovregion.utilities.REQUEST_KEY_REGION_ID_REGION_LIST_TO_ROUTE_LIST
+import com.sosnowskydevelop.tourroutessaratovregion.utilities.*
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteListViewModel
 
 class RouteListFragment : Fragment() {
@@ -21,6 +21,32 @@ class RouteListFragment : Fragment() {
 
     private val routeListViewModel: RouteListViewModel by viewModels {
         InjectorUtils.provideRouteListViewModelFactory(context = requireContext())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_route_search, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_search -> {
+                setFragmentResult(
+                    requestKey = REQUEST_KEY_REGION_ID_ROUTE_LIST_TO_ROUTE_SEARCH,
+                    result = bundleOf(
+                        BUNDLE_KEY_REGION_ID_ROUTE_LIST_TO_ROUTE_SEARCH
+                                to routeListViewModel.regionId
+                    )
+                )
+                findNavController().navigate(R.id.action_routeListFragment_to_routeSearchFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(

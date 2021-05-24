@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <EditText
+            android:id="@+id/routeSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="по названиям маршрутов"
+            app:layout_constraintBottom_toTopOf="@id/isSearchByRoutePoints"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/isSearchByRoutePoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="и по названиям точек"
+            app:layout_constraintBottom_toTopOf="@id/routeList"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/routeSearch" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routeList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/isSearchByRoutePoints"
+            tools:listitem="@layout/list_item_route" />
+
+        <TextView
+            android:id="@+id/nothingFound"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="Ничего не найдено"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/routeSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

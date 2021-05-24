@@ -55,11 +55,52 @@ class RouteRepository(context: Context) {
         return result
     }
 
-    fun getRoutesBySearchQuery(searchQuery: String): Array<Route> {
+    fun getRoutesBySearchString(
+        searchString: String,
+        isSearchByRoutePoints: Boolean,
+        regionId: Long,
+    ): Array<Route> {
         var result: Array<Route> = arrayOf()
-        val cursor: Cursor = database.rawQuery(
-            "SELECT * FROM Route where _name LIKE '%$searchQuery%'", null
-        )
+        val selectRoutesBySearchString =
+            "SELECT _id, _regionId, _name, _fileName " +
+                    "FROM Route " +
+                    "WHERE UPPER(_name) " +
+                    "LIKE UPPER('%$searchString%')"
+        val selectRoutesJoinedWithRoutePointsBySearchQuery =
+            "SELECT R._id, R._regionId, R._name, R._fileName " +
+                    "FROM RoutePoint AS RP " +
+                    "JOIN Route AS R " +
+                    "ON RP._routeId = R._id " +
+                    "WHERE UPPER(RP._name) " +
+                    "LIKE UPPER('%$searchString%')"
+        val andByRegionId = " AND _regionId = $regionId"
+        val cursor: Cursor = if (regionId == 0L) {
+            if (isSearchByRoutePoints) {
+                database.rawQuery(
+                    selectRoutesBySearchString + " UNION " +
+                            selectRoutesJoinedWithRoutePointsBySearchQuery,
+                    null
+                )
+            } else {
+                database.rawQuery(
+                    selectRoutesBySearchString,
+                    null
+                )
+            }
+        } else {
+            if (isSearchByRoutePoints) {
+                database.rawQuery(
+                    selectRoutesBySearchString + andByRegionId + " UNION " +
+                            selectRoutesJoinedWithRoutePointsBySearchQuery + andByRegionId,
+                    null
+                )
+            } else {
+                database.rawQuery(
+                    selectRoutesBySearchString + andByRegionId,
+                    null
+                )
+            }
+        }
         var isEntryNotEmpty: Boolean = cursor.moveToFirst()
         while (isEntryNotEmpty) {
             result += Route(
@@ -70,18 +111,6 @@ class RouteRepository(context: Context) {
             )
             isEntryNotEmpty = cursor.moveToNext()
         }
-//        cursor = database.rawQuery(
-//            "SELECT _routeId FROM RoutePoint where _name LIKE '%$searchQuery%'", null
-//        )
-//        isEntryNotEmpty = cursor.moveToFirst()
-//        while (isEntryNotEmpty) {
-//            routes.forEach { route ->
-//                if (route.id == cursor.getLong(cursor.getColumnIndex("_routeId"))) {
-//                    result += route
-//                }
-//            }
-//            isEntryNotEmpty = cursor.moveToNext()
-//        }
         cursor.close()
         return result
     }

@@ -12,7 +12,6 @@
             android:id="@+id/regionRatioMap"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            app:layout_constraintBottom_toTopOf="@id/regionMap"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +19,6 @@
             android:id="@+id/regionEmblem"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            app:layout_constraintBottom_toTopOf="@id/regionMap"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,15 +27,16 @@
             android:layout_width="256dp"
             android:layout_height="256dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="16dp"
             app:layout_constraintBottom_toTopOf="@id/routeList"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/regionRatioMap"/>
+            app:layout_constraintTop_toBottomOf="@id/regionRatioMap" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/routeList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -1,16 +1,14 @@
 package com.sosnowskydevelop.tourroutessaratovregion.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sosnowskydevelop.tourroutessaratovregion.R
 import com.sosnowskydevelop.tourroutessaratovregion.adapters.RegionAdapter
-import com.sosnowskydevelop.tourroutessaratovregion.adapters.RouteAdapter
 import com.sosnowskydevelop.tourroutessaratovregion.databinding.FragmentRegionListBinding
 import com.sosnowskydevelop.tourroutessaratovregion.utilities.InjectorUtils
 import com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListViewModel
@@ -20,6 +18,25 @@ class RegionListFragment : Fragment() {
 
     private val regionListViewModel: RegionListViewModel by viewModels {
         InjectorUtils.provideRegionListViewModelFactory(context = requireContext())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_route_search, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_regionListFragment_to_routeSearchFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(
@@ -44,34 +61,5 @@ class RegionListFragment : Fragment() {
             fragment = this,
         )
         fragmentRegionListBinding.regionList.adapter = regionListAdapter
-
-        val routeLayoutManager = LinearLayoutManager(requireContext())
-        fragmentRegionListBinding.routeList.layoutManager = routeLayoutManager
-        val routeListAdapter = RouteAdapter(
-            routes = arrayOf(),
-            fragment = this,
-        )
-        fragmentRegionListBinding.routeList.adapter = routeListAdapter
-
-        fragmentRegionListBinding.routeSearch.addTextChangedListener {
-            val searchQuery: String = it.toString()
-            if (searchQuery.isNotBlank()) {
-                fragmentRegionListBinding.regionList.visibility = View.INVISIBLE
-                fragmentRegionListBinding.routeList.visibility = View.VISIBLE
-                regionListViewModel.updateRoutes(searchQuery = searchQuery)
-                if (regionListViewModel.routes.isNotEmpty()) {
-                    fragmentRegionListBinding.nothingFound.visibility = View.INVISIBLE
-                    fragmentRegionListBinding.routeList.visibility = View.VISIBLE
-                    routeListAdapter.routes = regionListViewModel.routes
-                    routeListAdapter.notifyDataSetChanged()
-                } else {
-                    fragmentRegionListBinding.routeList.visibility = View.INVISIBLE
-                    fragmentRegionListBinding.nothingFound.visibility = View.VISIBLE
-                }
-            } else {
-                fragmentRegionListBinding.routeList.visibility = View.INVISIBLE
-                fragmentRegionListBinding.regionList.visibility = View.VISIBLE
-            }
-        }
     }
 }
