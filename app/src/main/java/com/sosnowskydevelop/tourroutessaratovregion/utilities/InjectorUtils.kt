@@ -20,6 +20,8 @@ object InjectorUtils {
         regionRepository = getRegionRepository(context = context),
     )
 
+    fun provideAnnotationViewModelFactory() = AnnotationViewModelFactory()
+
     fun provideRouteSearchViewModelFactory(context: Context) = RouteSearchViewModelFactory(
         routeRepository = getRouteRepository(context = context),
     )

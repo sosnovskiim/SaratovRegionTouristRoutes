@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_region_list">
 
         <action
+            android:id="@+id/action_regionListFragment_to_annotationFragment"
+            app:destination="@id/annotationFragment" />
+
+        <action
             android:id="@+id/action_regionListFragment_to_routeSearchFragment"
             app:destination="@id/routeSearchFragment" />
 
@@ -20,6 +24,12 @@
             app:destination="@id/routeListFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/annotationFragment"
+        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.AnnotationFragment"
+        android:label="AnnotationFragment"
+        tools:layout="@layout/fragment_annotation" />
 
     <fragment
         android:id="@+id/routeSearchFragment"

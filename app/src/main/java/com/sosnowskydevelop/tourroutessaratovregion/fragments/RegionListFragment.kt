@@ -26,11 +26,15 @@ class RegionListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_route_search, menu)
+        inflater.inflate(R.menu.menu_route_annotation_and_search, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_annotation -> {
+                findNavController().navigate(R.id.action_regionListFragment_to_annotationFragment)
+                true
+            }
             R.id.action_search -> {
                 findNavController().navigate(R.id.action_regionListFragment_to_routeSearchFragment)
                 true
