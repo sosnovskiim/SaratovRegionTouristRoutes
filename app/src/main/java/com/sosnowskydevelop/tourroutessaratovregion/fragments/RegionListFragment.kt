@@ -52,6 +52,8 @@ class RegionListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Турмаршруты"
 
         val regionLayoutManager = LinearLayoutManager(requireContext())

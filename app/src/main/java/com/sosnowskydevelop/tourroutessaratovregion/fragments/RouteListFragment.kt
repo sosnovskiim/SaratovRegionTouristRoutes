@@ -62,6 +62,8 @@ class RouteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val linearLayoutManager = LinearLayoutManager(requireContext())
         fragmentRouteListBinding.routeList.layoutManager = linearLayoutManager
 

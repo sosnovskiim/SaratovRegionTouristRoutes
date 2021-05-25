@@ -38,6 +38,8 @@ class RouteSearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Поиск маршрутов"
 
         val routeLayoutManager = LinearLayoutManager(requireContext())
