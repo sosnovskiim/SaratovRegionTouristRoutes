@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
+    android:background="@drawable/info_window_shape"
     android:orientation="vertical"
     android:padding="8dp">
 
@@ -10,8 +11,11 @@
         android:id="@+id/markerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:gravity="center_horizontal"
-        android:textColor="@color/black" />
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        tools:text="Название точки"/>
 
     <Space
         android:layout_width="match_parent"
@@ -22,14 +26,36 @@
         android:id="@+id/pointExport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/list_item_shape"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
         android:text="Поехали!"
-        android:textSize="8sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/gotoDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/list_item_shape"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
         android:text="Перейти к описанию"
-        android:textSize="8sp" />
+        android:textSize="12sp" />
 
 </LinearLayout>
