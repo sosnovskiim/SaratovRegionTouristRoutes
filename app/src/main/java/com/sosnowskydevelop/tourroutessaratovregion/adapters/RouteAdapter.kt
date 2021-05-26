@@ -37,8 +37,13 @@ class RouteAdapter(
                             to routes[position].id
                 )
             )
-            fragment.findNavController()
-                .navigate(R.id.action_routeListFragment_to_routeDetailFragment)
+            try {
+                fragment.findNavController()
+                    .navigate(R.id.action_routeListFragment_to_routeDetailFragment)
+            } catch (e: IllegalArgumentException) {
+                fragment.findNavController()
+                    .navigate(R.id.action_routeSearchFragment_to_routeDetailFragment)
+            }
         }
     }
 
