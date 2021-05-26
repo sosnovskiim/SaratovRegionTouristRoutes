@@ -20,6 +20,8 @@ class RouteSearchFragment : Fragment() {
         InjectorUtils.provideRouteSearchViewModelFactory(context = requireContext())
     }
 
+    private lateinit var routeListAdapter: RouteAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -44,39 +46,18 @@ class RouteSearchFragment : Fragment() {
 
         val routeLayoutManager = LinearLayoutManager(requireContext())
         fragmentRouteSearchBinding.routeList.layoutManager = routeLayoutManager
-        val routeListAdapter = RouteAdapter(
+        routeListAdapter = RouteAdapter(
             routes = arrayOf(),
             fragment = this,
         )
         fragmentRouteSearchBinding.routeList.adapter = routeListAdapter
 
         fragmentRouteSearchBinding.routeSearch.addTextChangedListener {
-            val searchString: String = it.toString()
-            if (searchString.isNotBlank()) {
-                if (fragmentRouteSearchBinding.isSearchByRoutePoints.isChecked) {
-                    routeSearchViewModel.updateRoutes(
-                        searchString = searchString,
-                        isSearchByRoutePoints = true,
-                    )
-                } else {
-                    routeSearchViewModel.updateRoutes(
-                        searchString = searchString,
-                        isSearchByRoutePoints = false,
-                    )
-                }
-                if (routeSearchViewModel.routes.isNotEmpty()) {
-                    fragmentRouteSearchBinding.nothingFound.visibility = View.INVISIBLE
-                    fragmentRouteSearchBinding.routeList.visibility = View.VISIBLE
-                    routeListAdapter.routes = routeSearchViewModel.routes
-                    routeListAdapter.notifyDataSetChanged()
-                } else {
-                    fragmentRouteSearchBinding.routeList.visibility = View.INVISIBLE
-                    fragmentRouteSearchBinding.nothingFound.visibility = View.VISIBLE
-                }
-            } else {
-                fragmentRouteSearchBinding.routeList.visibility = View.INVISIBLE
-                fragmentRouteSearchBinding.nothingFound.visibility = View.VISIBLE
-            }
+            searchRoutes(searchString = it.toString())
+        }
+
+        fragmentRouteSearchBinding.isSearchByRoutePoints.setOnCheckedChangeListener { _, _ ->
+            searchRoutes(searchString = fragmentRouteSearchBinding.routeSearch.text.toString())
         }
 
         setFragmentResultListener(
@@ -84,6 +65,34 @@ class RouteSearchFragment : Fragment() {
         ) { _, bundle ->
             val regionId: Long = bundle.getLong(BUNDLE_KEY_REGION_ID_ROUTE_LIST_TO_ROUTE_SEARCH)
             routeSearchViewModel.regionId = regionId
+        }
+    }
+
+    private fun searchRoutes(searchString: String) {
+        if (searchString.isNotBlank()) {
+            if (fragmentRouteSearchBinding.isSearchByRoutePoints.isChecked) {
+                routeSearchViewModel.updateRoutes(
+                    searchString = searchString,
+                    isSearchByRoutePoints = true,
+                )
+            } else {
+                routeSearchViewModel.updateRoutes(
+                    searchString = searchString,
+                    isSearchByRoutePoints = false,
+                )
+            }
+            if (routeSearchViewModel.routes.isNotEmpty()) {
+                fragmentRouteSearchBinding.nothingFound.visibility = View.INVISIBLE
+                fragmentRouteSearchBinding.routeList.visibility = View.VISIBLE
+                routeListAdapter.routes = routeSearchViewModel.routes
+                routeListAdapter.notifyDataSetChanged()
+            } else {
+                fragmentRouteSearchBinding.routeList.visibility = View.INVISIBLE
+                fragmentRouteSearchBinding.nothingFound.visibility = View.VISIBLE
+            }
+        } else {
+            fragmentRouteSearchBinding.routeList.visibility = View.INVISIBLE
+            fragmentRouteSearchBinding.nothingFound.visibility = View.VISIBLE
         }
     }
 }
