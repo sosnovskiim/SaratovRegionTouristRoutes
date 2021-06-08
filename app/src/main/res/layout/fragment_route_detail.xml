@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RouteDetailViewModel" />
+            type="com.sosnowskydevelop.saratovregiontouristroutes.viewmodels.RouteDetailViewModel" />
     </data>
 
     <com.github.barteksc.pdfviewer.PDFView

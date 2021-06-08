@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.sosnowskydevelop.tourroutessaratovregion.viewmodels.RegionListItemViewModel" />
+            type="com.sosnowskydevelop.saratovregiontouristroutes.viewmodels.RegionListItemViewModel" />
     </data>
 
     <TextView

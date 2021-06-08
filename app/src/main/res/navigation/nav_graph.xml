@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/regionListFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RegionListFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RegionListFragment"
         android:label="RegionListFragment"
         tools:layout="@layout/fragment_region_list">
 
@@ -27,13 +27,13 @@
 
     <fragment
         android:id="@+id/annotationFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.AnnotationFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.AnnotationFragment"
         android:label="AnnotationFragment"
         tools:layout="@layout/fragment_annotation" />
 
     <fragment
         android:id="@+id/routeSearchFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteSearchFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RouteSearchFragment"
         android:label="RouteSearchFragment"
         tools:layout="@layout/fragment_route_search">
 
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/routeListFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteListFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RouteListFragment"
         android:label="RouteListFragment"
         tools:layout="@layout/fragment_route_list">
 
@@ -61,7 +61,7 @@
 
     <fragment
         android:id="@+id/routeDetailFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteDetailFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RouteDetailFragment"
         android:label="RouteDetailFragment"
         tools:layout="@layout/fragment_route_detail">
 
@@ -73,7 +73,7 @@
 
     <fragment
         android:id="@+id/routeMapFragment"
-        android:name="com.sosnowskydevelop.tourroutessaratovregion.fragments.RouteMapFragment"
+        android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RouteMapFragment"
         android:label="RouteMapFragment"
         tools:layout="@layout/fragment_route_map">
 
