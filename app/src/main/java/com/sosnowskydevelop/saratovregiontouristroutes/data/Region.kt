@@ -6,6 +6,6 @@ data class Region(
     private val _fileName: String,
 ) {
     val id: Long get() = _id
-    val name: String get() = _name
+    val name: String get() = "$_name район"
     val fileName: String get() = _fileName
 }
