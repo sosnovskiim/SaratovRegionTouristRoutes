@@ -35,6 +35,10 @@
             android:name="com.sosnowskydevelop.saratovregiontouristroutes.activities.MainActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.sosnowskydevelop.saratovregiontouristroutes.activities.ImageActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.sosnowskydevelop.saratovregiontouristroutes.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sosnowskydevelop.saratovregiontouristroutes.R
+import com.sosnowskydevelop.saratovregiontouristroutes.activities.ImageActivity
 import com.sosnowskydevelop.saratovregiontouristroutes.adapters.RouteAdapter
 import com.sosnowskydevelop.saratovregiontouristroutes.databinding.FragmentRouteListBinding
 import com.sosnowskydevelop.saratovregiontouristroutes.utilities.*
 import com.sosnowskydevelop.saratovregiontouristroutes.viewmodels.RouteListViewModel
+
 
 class RouteListFragment : Fragment() {
     private lateinit var fragmentRouteListBinding: FragmentRouteListBinding
@@ -97,26 +100,43 @@ class RouteListFragment : Fragment() {
     }
 
     private fun subscribeRegionImages() {
-        fragmentRouteListBinding.regionRatioMap.setImageResource(
-            resources.getIdentifier(
-                "region_ratio_map_${routeListViewModel.regionFileName}",
-                "drawable",
-                "com.sosnowskydevelop.saratovregiontouristroutes"
-            )
+        val regionRatioMapResId: Int = resources.getIdentifier(
+            "region_ratio_map_${routeListViewModel.regionFileName}",
+            "drawable",
+            "com.sosnowskydevelop.saratovregiontouristroutes"
         )
-        fragmentRouteListBinding.regionEmblem.setImageResource(
-            resources.getIdentifier(
-                "region_emblem_${routeListViewModel.regionFileName}",
-                "drawable",
-                "com.sosnowskydevelop.saratovregiontouristroutes"
-            )
+        val regionEmblemResId: Int = resources.getIdentifier(
+            "region_emblem_${routeListViewModel.regionFileName}",
+            "drawable",
+            "com.sosnowskydevelop.saratovregiontouristroutes"
         )
-        fragmentRouteListBinding.regionMap.setImageResource(
-            resources.getIdentifier(
-                "region_map_${routeListViewModel.regionFileName}",
-                "drawable",
-                "com.sosnowskydevelop.saratovregiontouristroutes"
-            )
+        val regionMapResId: Int = resources.getIdentifier(
+            "region_map_${routeListViewModel.regionFileName}",
+            "drawable",
+            "com.sosnowskydevelop.saratovregiontouristroutes"
         )
+
+        fragmentRouteListBinding.regionRatioMap.setImageResource(regionRatioMapResId)
+        fragmentRouteListBinding.regionEmblem.setImageResource(regionEmblemResId)
+        fragmentRouteListBinding.regionMap.setImageResource(regionMapResId)
+
+        fragmentRouteListBinding.regionRatioMap.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
+            intent.putExtra("image_id", regionRatioMapResId)
+            intent.putExtra("title", routeListViewModel.regionName)
+            startActivity(intent)
+        }
+        fragmentRouteListBinding.regionEmblem.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
+            intent.putExtra("image_id", regionEmblemResId)
+            intent.putExtra("title", routeListViewModel.regionName)
+            startActivity(intent)
+        }
+        fragmentRouteListBinding.regionMap.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
+            intent.putExtra("image_id", regionMapResId)
+            intent.putExtra("title", routeListViewModel.regionName)
+            startActivity(intent)
+        }
     }
 }
