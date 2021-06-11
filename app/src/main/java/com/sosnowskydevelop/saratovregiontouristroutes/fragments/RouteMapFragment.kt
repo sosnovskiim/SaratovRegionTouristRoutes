@@ -60,8 +60,8 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
                             }
                     }
                 } else {
-                    stringUri += "lat_to=${routeMapViewModel.routeStartPoint?.latitude}" +
-                            "&lon_to=${routeMapViewModel.routeStartPoint?.longitude}"
+                    stringUri += "lat_to=${routeMapViewModel.routeStartPoint.latitude}" +
+                            "&lon_to=${routeMapViewModel.routeStartPoint.longitude}"
                 }
                 val uri: Uri = Uri.parse(stringUri)
                 val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -118,11 +118,11 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         fragmentRouteMapBinding.routeMap.setMultiTouchControls(true)
 
         mapController = fragmentRouteMapBinding.routeMap.controller
-        mapController.setZoom(12.0)
+        mapController.setZoom(10.0)
 
         addMarkerToMap(
             isStartPoint = true,
-            routePoint = routeMapViewModel.routeStartPoint!!,
+            routePoint = routeMapViewModel.routeStartPoint,
         )
 
         if (routeMapViewModel.routeEndPoint != null) {

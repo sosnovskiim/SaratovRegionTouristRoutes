@@ -111,7 +111,7 @@ class RoutePointRepository(context: Context) {
 
         val cursor: Cursor = database.query(
             "RoutePoint",
-            arrayOf("_id", "_routeId", "_name", "_latitude", "_longitude", "_page"),
+            arrayOf("_id", "_routeId", "_name", "_latitude", "_longitude"),
             null, null, null, null, null
         )
         var isEntryNotEmpty: Boolean = cursor.moveToFirst()
@@ -122,7 +122,6 @@ class RoutePointRepository(context: Context) {
                 _name = cursor.getString(cursor.getColumnIndex("_name")),
                 _latitude = cursor.getDouble(cursor.getColumnIndex("_latitude")),
                 _longitude = cursor.getDouble(cursor.getColumnIndex("_longitude")),
-                _page = cursor.getInt(cursor.getColumnIndex("_page"))
             )
             isEntryNotEmpty = cursor.moveToNext()
         }

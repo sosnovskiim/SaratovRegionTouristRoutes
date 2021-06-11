@@ -8,15 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
-import androidx.navigation.fragment.findNavController
 import com.sosnowskydevelop.saratovregiontouristroutes.R
 import com.sosnowskydevelop.saratovregiontouristroutes.data.RoutePoint
-import com.sosnowskydevelop.saratovregiontouristroutes.utilities.BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL
 import com.sosnowskydevelop.saratovregiontouristroutes.utilities.LOG_TAG
-import com.sosnowskydevelop.saratovregiontouristroutes.utilities.REQUEST_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.infowindow.InfoWindow
 
@@ -30,7 +25,6 @@ class MapMarkerInfoWindow(
 
         val markerName: TextView = mView.findViewById(R.id.markerName)
         val pointExport: Button = mView.findViewById(R.id.pointExport)
-        val gotoDetail: Button = mView.findViewById(R.id.gotoDetail)
 
         markerName.text = routePoint.name
 
@@ -50,17 +44,6 @@ class MapMarkerInfoWindow(
                     Toast.LENGTH_LONG
                 ).show()
             }
-        }
-
-        gotoDetail.setOnClickListener {
-            fragment.setFragmentResult(
-                requestKey = REQUEST_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL,
-                result = bundleOf(
-                    BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL to routePoint.page
-                )
-            )
-            fragment.findNavController()
-                .navigate(R.id.action_routeMapFragment_to_routeDetailFragment)
         }
     }
 

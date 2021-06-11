@@ -21,8 +21,6 @@ class RouteDetailFragment : Fragment() {
 
     private lateinit var routeDetailViewModel: RouteDetailViewModel
 
-    private var currentPage: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -79,13 +77,6 @@ class RouteDetailFragment : Fragment() {
                 routeDetailViewModel.routeName
             onResume()
         }
-        setFragmentResultListener(
-            requestKey = REQUEST_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL
-        ) { _, bundle ->
-            val page: Int = bundle.getInt(BUNDLE_KEY_PAGE_ROUTE_MAP_TO_ROUTE_DETAIL)
-            currentPage = page - 1
-            onResume()
-        }
     }
 
     override fun onResume() {
@@ -100,7 +91,6 @@ class RouteDetailFragment : Fragment() {
                     )
                 )
             )
-            .defaultPage(currentPage)
             .load()
     }
 }

@@ -75,14 +75,6 @@
         android:id="@+id/routeMapFragment"
         android:name="com.sosnowskydevelop.saratovregiontouristroutes.fragments.RouteMapFragment"
         android:label="RouteMapFragment"
-        tools:layout="@layout/fragment_route_map">
-
-        <action
-            android:id="@+id/action_routeMapFragment_to_routeDetailFragment"
-            app:destination="@id/routeDetailFragment"
-            app:popUpTo="@id/routeDetailFragment"
-            app:popUpToInclusive="true" />
-
-    </fragment>
+        tools:layout="@layout/fragment_route_map" />
 
 </navigation>
