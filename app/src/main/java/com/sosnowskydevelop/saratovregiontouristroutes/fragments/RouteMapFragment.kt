@@ -28,6 +28,8 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.infowindow.InfoWindow
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class RouteMapFragment : Fragment(), MapEventsReceiver {
     private lateinit var fragmentRouteMapBinding: FragmentRouteMapBinding
@@ -116,26 +118,44 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         fragmentRouteMapBinding.routeMap.setTileSource(TileSourceFactory.MAPNIK)
         fragmentRouteMapBinding.routeMap.setBuiltInZoomControls(true)
         fragmentRouteMapBinding.routeMap.setMultiTouchControls(true)
-
         mapController = fragmentRouteMapBinding.routeMap.controller
-        mapController.setZoom(10.0)
 
-        addMarkerToMap(
-            isStartPoint = true,
-            routePoint = routeMapViewModel.routeStartPoint,
-        )
+        addMarkerToMap(routePoint = routeMapViewModel.routeStartPoint)
 
         if (routeMapViewModel.routeEndPoint != null) {
-            addMarkerToMap(
-                routePoint = routeMapViewModel.routeEndPoint!!,
-            )
+            addMarkerToMap(routePoint = routeMapViewModel.routeEndPoint!!)
         }
 
         routeMapViewModel.routeIntermediatePoints?.forEach { routePoint ->
-            addMarkerToMap(
-                routePoint = routePoint,
-            )
+            addMarkerToMap(routePoint = routePoint)
         }
+
+        var sumOfLatitudeValues = 0.0
+        var sumOfLongitudeValues = 0.0
+        geoPoints.forEach {
+            sumOfLatitudeValues += it.latitude
+            sumOfLongitudeValues += it.longitude
+        }
+        val centralGeoPoint = GeoPoint(
+            sumOfLatitudeValues / geoPoints.size,
+            sumOfLongitudeValues / geoPoints.size
+        )
+        mapController.setCenter(centralGeoPoint)
+
+//        var maxDistanceBetweenPoints = 0.0
+//        for (i in 0 until geoPoints.size) {
+//            for (j in i + 1 until geoPoints.size) {
+//                val latitudeDifference = geoPoints[i].latitude - geoPoints[j].latitude
+//                val longitudeDifference = geoPoints[i].longitude - geoPoints[j].longitude
+//                val distanceBetweenSomePoints =
+//                    sqrt(latitudeDifference.pow(2) + longitudeDifference.pow(2))
+//                if (distanceBetweenSomePoints > maxDistanceBetweenPoints) {
+//                    maxDistanceBetweenPoints = distanceBetweenSomePoints
+//                }
+//            }
+//        }
+//        val mapZoom: Double = maxDistanceBetweenPoints * 25
+        mapController.setZoom(10.0)
     }
 
     private fun initPreferences() {
@@ -147,10 +167,7 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         )
     }
 
-    private fun addMarkerToMap(
-        isStartPoint: Boolean = false,
-        routePoint: RoutePoint,
-    ) {
+    private fun addMarkerToMap(routePoint: RoutePoint) {
         val routeGeoPoint = GeoPoint(routePoint.latitude, routePoint.longitude)
         geoPoints.add(routeGeoPoint)
         val marker = Marker(fragmentRouteMapBinding.routeMap)
@@ -164,7 +181,6 @@ class RouteMapFragment : Fragment(), MapEventsReceiver {
         )
         fragmentRouteMapBinding.routeMap.overlays.add(marker)
         fragmentRouteMapBinding.routeMap.invalidate()
-        if (isStartPoint) mapController.setCenter(routeGeoPoint)
     }
 
     override fun onResume() {
