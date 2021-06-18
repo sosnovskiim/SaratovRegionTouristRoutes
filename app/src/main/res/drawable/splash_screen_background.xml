@@ -2,9 +2,8 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/background"/>
+    <item android:drawable="@color/white"/>
 
-    <!--TODO Replace the test image with the application icon.-->
     <item>
         <bitmap
             android:gravity="center"
