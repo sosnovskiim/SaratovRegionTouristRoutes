@@ -110,15 +110,15 @@ class RouteListFragment : Fragment() {
             "drawable",
             "com.sosnowskydevelop.saratovregiontouristroutes"
         )
-        val regionMapResId: Int = resources.getIdentifier(
-            "region_map_${routeListViewModel.regionFileName}",
-            "drawable",
-            "com.sosnowskydevelop.saratovregiontouristroutes"
-        )
+//        val regionMapResId: Int = resources.getIdentifier(
+//            "region_map_${routeListViewModel.regionFileName}",
+//            "drawable",
+//            "com.sosnowskydevelop.saratovregiontouristroutes"
+//        )
 
         fragmentRouteListBinding.regionRatioMap.setImageResource(regionRatioMapResId)
         fragmentRouteListBinding.regionEmblem.setImageResource(regionEmblemResId)
-        fragmentRouteListBinding.regionMap.setImageResource(regionMapResId)
+//        fragmentRouteListBinding.regionMap.setImageResource(regionMapResId)
 
         fragmentRouteListBinding.regionRatioMap.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
@@ -132,11 +132,11 @@ class RouteListFragment : Fragment() {
             intent.putExtra("title", routeListViewModel.regionName)
             startActivity(intent)
         }
-        fragmentRouteListBinding.regionMap.setOnClickListener {
-            val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
-            intent.putExtra("image_id", regionMapResId)
-            intent.putExtra("title", routeListViewModel.regionName)
-            startActivity(intent)
-        }
+//        fragmentRouteListBinding.regionMap.setOnClickListener {
+//            val intent = Intent(requireActivity().applicationContext, ImageActivity::class.java)
+//            intent.putExtra("image_id", regionMapResId)
+//            intent.putExtra("title", routeListViewModel.regionName)
+//            startActivity(intent)
+//        }
     }
 }
