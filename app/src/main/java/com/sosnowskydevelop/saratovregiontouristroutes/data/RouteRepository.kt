@@ -4,13 +4,15 @@ import android.content.Context
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.sosnowskydevelop.saratovregiontouristroutes.utilities.DatabaseHelper
 import java.io.IOException
 
 class RouteRepository(context: Context) {
     private val database: SQLiteDatabase
 
-    private var routes: Array<Route> = arrayOf()
+    private var routes: MutableMap<Long, Route> = mutableMapOf()
 
     init {
         val databaseHelper = DatabaseHelper(context)
@@ -34,20 +36,22 @@ class RouteRepository(context: Context) {
         )
         var isEntryNotEmpty: Boolean = cursor.moveToFirst()
         while (isEntryNotEmpty) {
-            routes += Route(
+            val route = Route(
                 _id = cursor.getLong(cursor.getColumnIndex("_id")),
                 _regionId = cursor.getLong(cursor.getColumnIndex("_regionId")),
                 _name = cursor.getString(cursor.getColumnIndex("_name")),
                 _fileName = cursor.getString(cursor.getColumnIndex("_fileName")),
             )
+            routes[route.id] = route
             isEntryNotEmpty = cursor.moveToNext()
         }
         cursor.close()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun getRoutes(regionId: Long): Array<Route> {
         var result: Array<Route> = arrayOf()
-        routes.forEach { route ->
+        routes.forEach { (_, route) ->
             if (route.regionId == regionId) {
                 result += route
             }
@@ -115,7 +119,7 @@ class RouteRepository(context: Context) {
         return result
     }
 
-    fun getRoute(routeId: Long): Route = routes[routeId.toInt() - 1]
+    fun getRoute(routeId: Long): Route? = routes[routeId]
 
     companion object {
         // For Singleton instantiation
